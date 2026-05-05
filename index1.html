@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Card MMA | waled Khaled</title>
+  <meta name="theme-color" content="#090909" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Tahoma, Arial, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      min-height: 100vh;
+      color: #fff;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.88)),
+       url("https://smartcardhub-glitch.github.io/MMA/bakgraond.jpg");
+
+        background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(255, 70, 70, .22), transparent 30%),
+        radial-gradient(circle at 80% 80%, rgba(255,255,255,.10), transparent 28%),
+        linear-gradient(180deg, rgba(0,0,0,.20), rgba(0,0,0,.78));
+      z-index: -1;
+    }
+
+    .splash {
+      position: fixed;
+      inset: 0;
+      background: #050505;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      animation: splashOut .8s ease forwards;
+      animation-delay: 2.3s;
+    }
+
+    .splash-logo {
+      font-size: 58px;
+      font-weight: 900;
+      letter-spacing: 4px;
+      color: #d9d9d9;
+      text-shadow: 0 0 28px rgba(255,255,255,.28);
+      animation: logoPulse 1.4s ease infinite alternate;
+    }
+
+    .splash-logo span {
+      color: #e50914;
+      text-shadow: 0 0 30px rgba(229,9,20,.75);
+    }
+
+    .splash p {
+      margin-top: 12px;
+      color: #aaa;
+      font-size: 15px;
+      letter-spacing: 1px;
+    }
+
+    .loader-line {
+      width: 170px;
+      height: 3px;
+      margin-top: 22px;
+      border-radius: 99px;
+      background: rgba(255,255,255,.15);
+      overflow: hidden;
+    }
+
+    .loader-line span {
+      display: block;
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, #e50914, #fff);
+      animation: loading 2s ease forwards;
+    }
+
+    @keyframes loading { to { width: 100%; } }
+    @keyframes logoPulse {
+      from { transform: scale(.96); opacity: .7; }
+      to { transform: scale(1.04); opacity: 1; }
+    }
+    @keyframes splashOut {
+      to { opacity: 0; visibility: hidden; pointer-events: none; }
+    }
+
+    .page {
+      max-width: 470px;
+      margin: auto;
+      min-height: 100vh;
+      padding: 22px 16px 34px;
+      animation: pageIn 1.2s ease both;
+      animation-delay: 2.65s;
+      opacity: 0;
+    }
+
+    @keyframes pageIn {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .top-card {
+      min-height: 290px;
+      border-radius: 34px;
+      padding: 22px;
+      background: linear-gradient(145deg, rgba(255,255,255,.16), rgba(255,255,255,.05));
+      border: 1px solid rgba(255,255,255,.22);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 25px 60px rgba(0,0,0,.45);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .top-card::before {
+      content: "";
+      position: absolute;
+      inset: -60px;
+      background: radial-gradient(circle at top left, rgba(229,9,20,.35), transparent 35%);
+      z-index: 0;
+    }
+
+    .brand {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand-badge {
+      border: 1px solid rgba(255,255,255,.25);
+      background: rgba(0,0,0,.34);
+      padding: 9px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      color: #eee;
+    }
+
+    .logo {
+      font-size: 32px;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+
+    .logo span { color: #ff1722; }
+
+    .hero-info {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      margin-top: 38px;
+    }
+
+    .avatar {
+      width: 118px;
+      height: 118px;
+      border-radius: 50%;
+      margin: auto;
+      background: linear-gradient(145deg, rgba(255,255,255,.94), rgba(255,255,255,.70));
+      border: 4px solid rgba(255,255,255,.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #e50914;
+      font-size: 55px;
+      font-weight: 900;
+      box-shadow: 0 12px 35px rgba(0,0,0,.38), 0 0 30px rgba(229,9,20,.22);
+    }
+
+    h1 {
+      font-size: 31px;
+      margin-top: 16px;
+      line-height: 1.25;
+    }
+
+    .verified {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 23px;
+      height: 23px;
+      background: #1da1f2;
+      color: white;
+      border-radius: 50%;
+      font-size: 14px;
+      vertical-align: middle;
+    }
+
+    .subtitle {
+      margin-top: 8px;
+      color: rgba(255,255,255,.78);
+      font-size: 15px;
+    }
+
+    .tagline {
+      margin: 18px auto 0;
+      max-width: 330px;
+      color: rgba(255,255,255,.88);
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr 64px;
+      gap: 12px;
+      margin: 20px 0 14px;
+    }
+
+    .btn {
+      min-height: 58px;
+      border-radius: 18px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      font-weight: 800;
+      font-size: 17px;
+      border: 1px solid rgba(255,255,255,.15);
+      transition: .25s ease;
+      cursor: pointer;
+    }
+
+    button.btn {
+      width: 100%;
+    }
+
+    .btn-main {
+      color: #fff;
+      background: linear-gradient(135deg, #e50914, #780007);
+      box-shadow: 0 12px 24px rgba(229,9,20,.30);
+    }
+
+    .btn-dark {
+      color: #fff;
+      background: rgba(0,0,0,.72);
+      backdrop-filter: blur(12px);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      filter: brightness(1.08);
+    }
+
+    .section {
+      margin-top: 18px;
+      border-radius: 26px;
+      padding: 18px;
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.16);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 18px 45px rgba(0,0,0,.28);
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      color: #fff;
+      font-weight: 900;
+      font-size: 18px;
+    }
+
+    .section-title span {
+      font-size: 13px;
+      color: rgba(255,255,255,.62);
+      font-weight: 400;
+    }
+
+    .links {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+    }
+
+    .link-item {
+      text-decoration: none;
+      color: white;
+      text-align: center;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .icon {
+      width: 58px;
+      height: 58px;
+      margin: 0 auto 8px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 25px;
+      font-weight: 900;
+      box-shadow: 0 10px 20px rgba(0,0,0,.28);
+      transition: .25s;
+    }
+
+    .link-item:hover .icon {
+      transform: translateY(-5px) scale(1.04);
+    }
+
+    .facebook { background: #1877f2; }
+    .whatsapp { background: #25d366; }
+    .snapchat { background: #fffc00; color: #111; }
+    .instagram { background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045); }
+    .website { background: #0ea5e9; }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .mini-card {
+      padding: 15px;
+      border-radius: 18px;
+      background: rgba(0,0,0,.35);
+      border: 1px solid rgba(255,255,255,.13);
+    }
+
+    .mini-card b {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 7px;
+    }
+
+    .mini-card p {
+      font-size: 13px;
+      line-height: 1.7;
+      color: rgba(255,255,255,.72);
+    }
+
+    .wide-btns {
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 22px;
+      color: rgba(255,255,255,.68);
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    .float-share {
+      position: fixed;
+      left: 18px;
+      bottom: 18px;
+      z-index: 10;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.25);
+      background: rgba(0,0,0,.72);
+      color: #fff;
+      font-size: 24px;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 14px 32px rgba(0,0,0,.45);
+    }
+
+    @media (max-width: 420px) {
+      .page { padding: 14px 12px 28px; }
+      .top-card { border-radius: 28px; padding: 18px; }
+      h1 { font-size: 28px; }
+      .links { gap: 7px; }
+      .icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 17px;
+        font-size: 22px;
+      }
+      .link-item { font-size: 11px; }
+      .info-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="splash">
+    <div class="splash-logo"><span>M</span>MA</div>
+    <p>هويتك الرقمية بلمسة واحدة</p>
+    <div class="loader-line"><span></span></div>
+  </div>
+
+  <main class="page">
+
+    <section class="top-card">
+      <div class="brand">
+        <div class="logo"><span>M</span>MA</div>
+        <div class="brand-badge">Digital Card</div>
+      </div>
+
+      <div class="hero-info">
+        <div class="avatar">W</div>
+        <h1>waled Khaled <span class="verified">✓</span></h1>
+        <div class="subtitle">الأردن | بطاقة رقمية ذكية</div>
+        <p class="tagline">
+          مشاركة بياناتك وروابطك بسرعة عبر NFC و QR Code، مع حفظ جهة الاتصال والرجوع إليها بأي وقت.
+        </p>
+      </div>
+    </section>
+
+    <div class="actions">
+      <button class="btn btn-main" onclick="saveContact()">
+        + أضف إلى جهات الاتصال
+      </button>
+      <a class="btn btn-dark" href="tel:0799458547">☎</a>
+    </div>
+
+    <section class="section">
+      <div class="section-title">
+        روابط التواصل
+        <span>كل روابطك بمكان واحد</span>
+      </div>
+
+      <div class="links">
+       
+
+        <a class="link-item" href="https://wa.me/962780464559" target="_blank">
+          <div class="icon whatsapp">☎</div>
+          واتساب
+        </a>
+
+        <a class="link-item" href="https://www.snapchat.com/add/waallliiiddd?share_id=gGrsLVTHr9k&locale=en-US" target="_blank">
+          <div class="icon snapchat">👻</div>
+          سناب
+        </a>
+
+        <a class="link-item" href="https://www.instagram.com/waallliiiddd?igsh=a2x4bGhkOTlodThz" target="_blank">
+          <div class="icon instagram">◎</div>
+          إنستغرام
+        </a>
+
+        
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">
+        عن البطاقة
+        <span>Card MMA</span>
+      </div>
+
+      <div class="info-grid">
+        <div class="mini-card">
+          <b>NFC سريع</b>
+          <p>لمسة واحدة تفتح البطاقة الرقمية مباشرة على الهاتف.</p>
+        </div>
+
+        <div class="mini-card">
+          <b>QR Code</b>
+          <p>بديل سريع لأي جهاز لا يدعم قراءة NFC.</p>
+        </div>
+
+        <div class="mini-card">
+          <b>حفظ البيانات</b>
+          <p>يمكن للعميل حفظ جهة الاتصال والرجوع لها لاحقًا.</p>
+        </div>
+
+        <div class="mini-card">
+          <b>تحديث دائم</b>
+          <p>يمكن تعديل الروابط والمعلومات بدون تغيير البطاقة.</p>
+        </div>
+      </div>
+
+      <div class="wide-btns">
+        <a class="btn btn-dark" href="mailto:example@email.com">example@email.com</a>
+        <a class="btn btn-main" href="https://wa.me/962780464559" target="_blank">اطلب بطاقتك الرقمية الآن</a>
+      </div>
+    </section>
+
+    <div class="footer">
+      Card MMA<br />
+      تصميم ذكي للتواصل الاحترافي
+    </div>
+
+  </main>
+
+  <button class="float-share" onclick="sharePage()">↗</button>
+
+  
+
+
+<script>
+function saveContact(){
+
+const vcard = `BEGIN:VCARD
+VERSION:3.0
+CLASS:PUBLIC
+N:Khaled;waled;;;
+FN:waled Khaled
+TITLE:Jordan | Card MMA
+ORG:Card MMA
+TEL;TYPE=mobile,voice:+962780464559
+
+URL;Facebook:https://www.facebook.com/share/1C5ZV2Kt9d/
+URL;Instagram:https://www.instagram.com/iit5._?igsh=MWR5aDhwbjRsZ2k1OA==
+URL;Snapchat:https://www.snapchat.com/add/iit5_2008?share_id=4mBbufUfI-g&locale=ar-JO
+URL;Connect:https://smartcardhub-glitch.github.io/MMA/
+
+END:VCARD`;
+
+const blob = new Blob([vcard], {type:"text/vcard;charset=utf-8"});
+const url = URL.createObjectURL(blob);
+
+const a = document.createElement("a");
+a.href = url;
+a.download = "waled-khaled.vcf";
+document.body.appendChild(a);
+a.click();
+
+setTimeout(()=>{
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+},1000);
+
+}
+</script>
+
+</body>
+</html>
